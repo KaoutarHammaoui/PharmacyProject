@@ -26,3 +26,12 @@ Route::get('/pharmacist/dashboard', [pharmacycontroller::class, 'indexpharmacist
 Route::get('/hash', function () {
     return bcrypt('kaoutar');
 });
+Route::get('/addUser',function(){
+    return view('admin.addUser');
+})->name('addUserView');
+Route::post('/insertUser',[pharmacycontroller::class,'addUser'])->name('addUser');
+Route::get('/usersinfos',function(){
+    return view('admin.usersInfos');
+})->name('usersInfos');
+
+Route::post('/logOut',[pharmacycontroller::class,'logOut'])->name('logOut');
