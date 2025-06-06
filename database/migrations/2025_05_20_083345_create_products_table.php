@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('codeBar');
             $table->boolean('withRecepie');
             $table->integer('threshold');
+            $table->text('description');
             $table->timestamps();
         });
     }

@@ -15,9 +15,16 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_name');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->integer('quantity_sold')->default(1);
+            $table->decimal('total', 10, 2);
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->onDeleteCascade();
-            $table->decimal('total');
+            
+            // Foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
         });
     }
 

@@ -11,19 +11,20 @@
     
     @include('admin.sidebar')
 
-    <main class="flex-1 flex items-center justify-center p-6">
-        <div class="bg-white p-10 rounded-xl shadow-lg text-center space-y-6 max-w-md w-full">
-            <h1 class="text-3xl font-bold text-[#34495e]">☑ Done with success!</h1>
-            <p class="text-gray-700 text-lg">Your operation was completed successfully.</p>
+   <main class="flex-1 flex items-center justify-center p-6">
+    <div class="bg-white p-10 rounded-xl shadow-lg text-center space-y-6 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-[#34495e]">☑ Succès confirmé !</h1>
+        <p class="text-gray-700 text-lg">Votre opération a été réalisée avec succès.</p>
 
-            <div>
-                <p class="text-sm text-gray-500 mb-3">Wanna go back to the users panel?</p>
-                <a href="{{ route('usersInfos') }}"
-                   class="inline-block bg-blue-800 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
-                    Go Back
-                </a>
-            </div>
+        <div>
+            <p class="text-sm text-gray-500 mb-3">Souhaitez-vous retourner au panneau des utilisateurs ?</p>
+            <a href="{{ route('usersInfos') }}"
+               class="inline-block bg-blue-800 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
+                Retourner
+            </a>
         </div>
-    </main>
+    </div>
+</main>
+
 </body>
 </html>

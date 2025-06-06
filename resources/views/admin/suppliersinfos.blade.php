@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gestion des utilisateurs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Fournisseurs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
@@ -33,6 +33,7 @@
             text-align: center;
             color: #2c3e50;
             font-size: 30px;
+            font-weight: 800;
         }
 
         .add-user {
@@ -64,8 +65,9 @@
 
         th, td {
             padding: 12px 15px;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #ddd;
+            text-align: left;
         }
 
         th {
@@ -100,51 +102,49 @@
             background-color: #dc2626;
         }
 
-        /* Empêcher le retour à la ligne pour la date et les boutons d'action */
+        /* Prevent text wrap for date and action buttons */
         .nowrap {
             white-space: nowrap;
         }
     </style>
 </head>
 <body>
+@include('partials.topbar')
+
 <div class="flex min-h-screen">
     @include('admin.sidebar')
-    <main class="flex-1 p-6">
+    <main class="flex-1 p-6 mt-10">
         <div class="container">
-            <h1>👥 Gestion des utilisateurs</h1>
+            <h1>Gestion des fournisseurs</h1>
 
             <div class="add-user">
-                <a href="{{ route('addUserView') }}">➕ Ajouter un nouvel utilisateur</a>
+                <a href="{{ route('addSupView') }}"> Ajouter Fournisseur +</a>
             </div>
 
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th style="white-space: nowrap;">Nom complet</th>
-
-
-                    <th style="white-space: nowrap;">Email</th>
-                    <th style="white-space: nowrap;">Mot de passe</th>
-                    <th>Rôle</th>
-                    <th style="white-space: nowrap;">Date d'inscription</th>
+                    <th>Nom complet</th>
+                    <th>Tel</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Date d'ajout</th>
                     <th colspan="2">Actions</th>
                 </tr>
-                @foreach($users as $user)
+                @foreach($suppliers as $supplier)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>*******</td>
-                    <td>{{ ucfirst($user->role) }}</td>
-                    <td class="nowrap">{{ $user->created_at ? $user->created_at->format('Y-m-d') : 'Pas de date' }}</td>
-                    <td class="nowrap">
-                        <a href="{{ route('updateUserr', $user->id) }}">✏️ Modifier</a>
+                    <td>{{ $supplier->name }}</td>
+                    <td>{{ $supplier->tel }}</td>
+                    <td>{{ $supplier->email }}</td>
+                    <td>{{ $supplier->adress }}</td>
+                    <td class="nowrap">{{ $supplier->created_at ? $supplier->created_at->format('Y-m-d') : 'No date' }}</td>
+                    <td class="nowrap ">
+                        <a href="{{ route('editSup', $supplier->id) }}" class="bg-green-800 hover:bg-green-800">Modifier</a>
                     </td>
                     <td class="nowrap">
-                        <form action="{{ route('deleteUser', $user->id) }}" method="POST">
+                        <form action="{{ route('deleteSup', $supplier->id) }}" method="POST">
                             @csrf 
                             @method('DELETE')
-                            <button type="submit" class="db">🗑️ Supprimer</button>
+                            <button type="submit" class="db">supprimer</button>
                         </form>
                     </td>
                 </tr>

@@ -12,11 +12,13 @@ class salesModel extends Model
     protected $fillable = [
         'user_id',
         'user_name', 
+        'product_id',       // Change to product_id
+        'quantity_sold',    
         'total',
         'created_at'
     ];
     
-    // Specify table name (optional - Laravel will use 'sales_models' by default)
+    // Specify table name
     protected $table = 'sales';
     
     // Relationship with User model
@@ -25,7 +27,13 @@ class salesModel extends Model
         return $this->belongsTo(User::class);
     }
     
-    // Add the sales calculation methods we discussed earlier
+    // Relationship with Product
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    
+    // Add the sales calculation methods
     public static function dailySales($date = null)
     {
         $date = $date ?? now()->toDateString();

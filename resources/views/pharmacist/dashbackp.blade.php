@@ -18,7 +18,7 @@
 
             <div>
                 <p class="text-sm text-gray-500 mb-3">Wanna go back to dashboard?  </p>
-                <a href="{{ route('pharmacist.dashboard') }}"
+                <a href="{{ route('dashboardp') }}"
                    class="inline-block bg-blue-800 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
                     Go Back ->
                 </a>

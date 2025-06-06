@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pharmacycontroller;
 use App\Http\Controllers\pharmacistController;
+use App\Http\Controllers\Adminncontroller;
+use App\Http\Controllers\PharmmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,20 +18,25 @@ use App\Http\Controllers\pharmacistController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 Route::get('login',function(){
     return view('loginInterface');
 });
 Route::post('login',[pharmacycontroller::class,'login'])->name('login');
-Route::get('/admin/dashboard', [pharmacycontroller::class, 'indexadmin'])->name('admin.dashboard');
-Route::get('/pharmacist/dashboard', [pharmacycontroller::class, 'indexpharmacist'])->name('pharmacist.dashboard');
 
 Route::get('/addUser',function(){
     return view('admin.addUser');
 })->name('addUserView');
+Route::get('/addSup',function(){
+    return view('admin.addSup');
+})->name('addSupView');
 Route::post('/insertUser',[pharmacycontroller::class,'addUser'])->name('addUser');
 Route::get('/usersinfos', [pharmacycontroller::class,'getUsers'])->name('usersInfos');
+
+
+Route::post('/insertSup',[pharmacycontroller::class,'addSup'])->name('addSup');
+Route::get('/suppliersinfos', [pharmacycontroller::class,'getSups'])->name('suppliersinfos');
 
 Route::post('/logOut',[pharmacycontroller::class,'logOut'])->name('logOut');
 //sales
@@ -48,6 +55,10 @@ Route::put('/restore-user/{id}', [pharmacycontroller::class, 'restoreUser'])->na
 Route::get('/updateU/{id}',[pharmacycontroller::class,'editUser'])->name('updateUserr'); 
 Route::patch('/updateUser/{id}',[pharmacycontroller::class,'updateUser'])->name('updateUser');
 Route::delete('/deleteU/{id}',[pharmacycontroller::class,'deleteU'])->name('deleteUser');
+
+Route::get('/editSup/{id}',[pharmacycontroller::class,'editSup'])->name('editSup'); 
+Route::patch('/updateSup/{id}', [pharmacycontroller::class, 'updateSup'])->name('updateSup');
+Route::delete('/deleteSup/{id}',[pharmacycontroller::class,'deleteS'])->name('deleteSup');
 
 //settings
 Route::get('/settings',function(){
@@ -88,6 +99,45 @@ Route::patch('/changepasswordp/{id}',[pharmacistController::class,'changepassp']
 //changing email
 Route::get('/changemailp/{id}',[pharmacistController::class,'changeusernamep'])->name('changeusernamep');
 Route::patch('/changeemailp/{id}',[pharmacistController::class,'changeemailp'])->name('changeemailp');
-Route::get('/afteroperationp',function(){
+Route::get('/afteroperationp', function() {
     return view('pharmacist.dashbackp');
 })->name('dashbackp');
+
+
+//admin's inventory
+
+Route::get('/add-med', [Adminncontroller::class, 'showAddMed'])->name('addMed.show');
+
+Route::post('/insertMed', [Adminncontroller::class, 'addMed'])->name('addMed.store');
+
+Route::get('/medsinfos', [Adminncontroller::class,'getMeds'])->name('medsInfos');
+Route::get('/viewMed/{id}', [Adminncontroller::class,'getMed'])->name('medInfos');
+
+Route::get('/editMed/{id}',[Adminncontroller::class,'editMed'])->name('editMed'); 
+Route::patch('/updateMed/{id}', [Adminncontroller::class, 'updateMed'])->name('updateMed');
+Route::delete('/deleteMed/{id}',[Adminncontroller::class,'deleteMed'])->name('deleteMed');
+Route::get('/shortagedMeds', [AdminnController::class, 'medsShortage'])->name('medsShortage');
+
+//admin's dashboard    
+Route::get('/admin/dashboard', [AdminnController::class, 'dashboard'])->name('dashboard');
+
+
+//pharmacist's dashboard 
+Route::get('/pharmacist/dashboard', [PharmmController::class, 'dashboard'])->name('dashboardp');
+
+//pharmacist's inventory
+
+Route::get('/add-medp', [PharmmController::class, 'showAddMed'])->name('addMedp.show');
+
+Route::post('/insertMedp', [PharmmController::class, 'addMed'])->name('addMedp.store');
+
+Route::get('/medsinfosp', [PharmmController::class,'getMeds'])->name('medsInfosp');
+Route::get('/viewMedp/{id}', [PharmmController::class,'getMed'])->name('medInfosp');
+
+Route::get('/editMedp/{id}',[PharmmController::class,'editMed'])->name('editMedp'); 
+Route::patch('/updateMedp/{id}', [PharmmController::class, 'updateMed'])->name('updateMedp');
+Route::delete('/deleteMedp/{id}',[PharmmController::class,'deleteMed'])->name('deleteMedp');
+Route::get('/shortagedMedsp', [PharmmController::class, 'medsShortage'])->name('medsShortagep');
+Route::get('/c',function(){
+    return view('admin.cryptee');
+});

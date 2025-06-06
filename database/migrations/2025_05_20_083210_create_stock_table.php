@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stock', function (Blueprint $table) {
-            $table->bigIncrements('product_id');
-            $table->timestamps();
+        Schema::create('stocks', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('product_id');
             $table->integer('quantite');
             $table->date('date_expiration');
+            $table->timestamps();
+        
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
+        
     }
 
     /**

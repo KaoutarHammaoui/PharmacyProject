@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equivalences', function (Blueprint $table) {
-            $table->integer('id_equi_product');
-            $table->integer('id_original_product');
-            $table->string('name_original_product');
-            $table->string('name_equi_product');
-            $table->timestamps();
+        Schema::table('suppliers', function (Blueprint $table) {
+            $table->softDeletes(); // Adds 'deleted_at' column
         });
     }
 
@@ -29,7 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('equivalences');
+        Schema::table('suppliers', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

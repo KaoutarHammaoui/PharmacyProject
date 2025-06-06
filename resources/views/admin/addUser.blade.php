@@ -18,7 +18,7 @@
                     @csrf 
 
                     <div>
-                        <label class="block text-gray-700 font-medium mb-1" for="nom">Full Name</label>
+                        <label class="block text-gray-700 font-medium mb-1" for="nom">Nom Complet</label>
                         <input type="text" name="nom" id="nom" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
@@ -28,7 +28,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-gray-700 font-medium mb-1" for="pass">Password</label>
+                        <label class="block text-gray-700 font-medium mb-1" for="pass">Mot de Pass</label>
                         <input type="password" name="pass" id="pass" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
@@ -42,7 +42,7 @@
 
                     <div class="text-center">
                         <button type="submit" class="bg-[#2c3e50] hover:bg-[#34495e] text-white font-semibold px-6 py-2 rounded-lg transition duration-300">
-                             ✅ Add User
+                             ✅ Ajouter
                         </button>     
                     </div>
                 </form>
